@@ -8,6 +8,8 @@ contract RealEstate  {
     address public seller;
     address public buyer;
 
+    string tokenURI = "" ;
+
     RealEstateEngine realEstateEngine;
 
     constructor (address _realEstateEngine) {
@@ -19,8 +21,9 @@ contract RealEstate  {
         _;
     }
 
-    function initiateTransaction () public view onlySeller {
-
+    function initiateTransaction () public onlySeller {
+        // require()
+        realEstateEngine.mint(tokenURI, msg.sender);
     }
 
 }
