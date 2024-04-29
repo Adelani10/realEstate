@@ -24,6 +24,11 @@ contract RealEstate  {
     function initiateTransaction () public onlySeller {
         // require()
         realEstateEngine.mint(tokenURI, msg.sender);
+
+
+        require(realEstateEngine.ownerOf(1) == seller, "seller don't own nft");
+
+        realEstateEngine.transferFrom(seller, address(this), 1);
     }
 
 }
