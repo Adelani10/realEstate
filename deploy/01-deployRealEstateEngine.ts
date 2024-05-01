@@ -8,18 +8,21 @@ const deployRealEstateEngine: DeployFunction = async (hre: HardhatRuntimeEnviron
     
     const {deploy, log} = deployments
     const {deployer } = await getNamedAccounts()
+    const waitBlockConfirmations = developmentChains.includes(network.name)
+    ? 1
+    : VERIFICATION_BLOCK_CONFIRMATIONS
 
 
     log("---------------")
     log("deploying pls wait")
 
-    const args: [] = []
+    const args: any[] = []
 
     const realEstateEngine = await deploy("RealEstateEngine", {
         from: deployer,
         args: args,
         log: true,
-        waitConfirmations: VERIFICATION_BLOCK_CONFIRMATIONS
+        waitConfirmations: waitBlockConfirmations
     })
 
     if(developmentChains.includes(network.name) && process.env.SEPOLIA_RPC_URL){

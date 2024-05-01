@@ -40,7 +40,7 @@
 export const developmentChains = ["hardhat", "localhost"]
 export const VERIFICATION_BLOCK_CONFIRMATIONS = 6
 export const INITIAL_SUPPLY = 1000
-export const PEDETIN_CA = "0x5FbDB2315678afecb367f032d93F642f64180aa3" 
+export const ENGINE_CA = "0x5FbDB2315678afecb367f032d93F642f64180aa3" 
 // export const frontEndContractsFile = "../nextjs-nft-marketplace-moralis-fcc/constants/networkMapping.json"
 // export const frontEndContractsFile2 =
 //     "../nextjs-nft-marketplace-thegraph-fcc/constants/networkMapping.json"

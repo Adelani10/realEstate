@@ -1,6 +1,6 @@
 import { DeployFunction } from "hardhat-deploy/dist/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS,  } from "../helper-hardhat-config";
+import { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS, ENGINE_CA  } from "../helper-hardhat-config";
 import verify from "../utils/verify";
 
 const deployRealEstate: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
@@ -8,18 +8,21 @@ const deployRealEstate: DeployFunction = async (hre: HardhatRuntimeEnvironment) 
     
     const {deploy, log} = deployments
     const {deployer } = await getNamedAccounts()
+    const waitBlockConfirmations = developmentChains.includes(network.name)
+    ? 1
+    : VERIFICATION_BLOCK_CONFIRMATIONS
 
 
     log("---------------")
     log("deploying pls wait")
 
-    const args: [] = []
+    const args: any[] = [ENGINE_CA,]
 
     const realEstate = await deploy("RealEstate", {
         from: deployer,
         args: args,
         log: true,
-        waitConfirmations: VERIFICATION_BLOCK_CONFIRMATIONS
+        waitConfirmations: waitBlockConfirmations
     })
 
     if(developmentChains.includes(network.name) && process.env.SEPOLIA_RPC_URL){
