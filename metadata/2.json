@@ -1,0 +1,33 @@
+{
+    "name": "Architectural CA Modern Penthouse",
+    "address": "70780 Iperin, Agbara Igbesa, Ogun",
+    "description": "Beautiful modern home for realaxations and parties",
+    "image": "https://ipfs.io/ipfs/QmXFkTZvSGKKJoRd73Ak3VzF5vbu9G9TY3UdPD6UyY8Yot",
+    "id": "2",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 20
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Party suitable residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 12
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 14
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 3979
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 1980
+        }
+    ]
+}

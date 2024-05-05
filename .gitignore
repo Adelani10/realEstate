@@ -1,5 +1,6 @@
 node_modules
 .env
+/nft-images
 
 # Hardhat files
 /cache

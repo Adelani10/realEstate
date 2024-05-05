@@ -1,0 +1,33 @@
+{
+    "name": "Luxury NYC Ranch House",
+    "address": "157 Mazamaza, Mile 2 Lagos",
+    "description": "Luxury Ranch House located just outside Agbara",
+    "image": "https://ipfs.io/ipfs/QmPvE1LgZhbDmXiuoSES6cTiaRXYGGvfjyjdVQYzKk3Egf",
+    "id": "1",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 10
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Ranch"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 2
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 4
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 2200
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2015
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "WA Nature Home",
+    "address": "183 Woodland Drive, Agbara Estate, Ogun",
+    "description": "Comfy beach house in Agbara Estate",
+    "image": "https://ipfs.io/ipfs/QmXbrG8UnrmxznAq7BFKXxbUMw2UM9ZT6bXe6zBL2Xw9Yj",
+    "id": "3",
+    "attributes": [
+        {
+            "trait_type": "Purchase Price",
+            "value": 22
+        },
+        {
+            "trait_type": "Type of Residence",
+            "value": "Single family residence"
+        },
+        {
+            "trait_type": "Bed Rooms",
+            "value": 6
+        },
+        {
+            "trait_type": "Bathrooms",
+            "value": 10
+        },
+        {
+            "trait_type": "Square Feet",
+            "value": 2202
+        },
+        {
+            "trait_type": "Year Built",
+            "value": 2020
+        }
+    ]
+}
