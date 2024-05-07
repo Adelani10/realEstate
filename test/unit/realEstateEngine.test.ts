@@ -4,40 +4,6 @@ import { RealEstateEngine } from "../../typechain-types"
 import { Signer } from "ethers"
 import { assert, expect } from "chai"
 
-const uri = {
-  "name": "Luxury NYC Penthouse",
-  "address": "157 W 57th St APT 498, New York NY 10019",
-  "description": "Luxury Penthouse located in the heart of NYC",
-  "image": "https://ipfs.io/ipfs/QmQUozr1iLAusXDxrvsBSJ3PYB3rUeUuBAvVWw6nop2uu7c/1.png",
-  "id": "1",
-  "attributes": [
-    {
-      "trait_type": "Purchase Price",
-      "value": 20
-    },
-    {
-      "trait_type": "Type of Residence",
-      "value": "Condo"
-    },
-    {
-      "trait_type": "Bed Roons",
-      "value": 2
-    },
-    {
-      "trait_type": "Bathroons",
-      "value": 3
-    },
-    {
-      "trait_type": "Square Feet",
-      "value": 2200
-    },
-    {
-      "trait_type": "Year Built",
-      "value": 2013
-    },
-  ]
-}
-
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("RealEstateEngine", () => {

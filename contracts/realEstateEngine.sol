@@ -10,10 +10,11 @@ contract RealEstateEngine is ERC721URIStorage {
 
     constructor() ERC721("RealEstate", "EST") {}
 
-    function mint(string memory _tokenURI, address seller) public  {
-        uint256 currentId = _tokenIds.current();
-        _mint(seller, currentId);
-        _setTokenURI(currentId, _tokenURI);
+    function mint(string memory _tokenURI) public returns (uint256) {
         _tokenIds.increment();
+        uint256 currentId = _tokenIds.current();
+        _mint(msg.sender, currentId);
+        _setTokenURI(currentId, _tokenURI);
+        return currentId;
     }
 }
