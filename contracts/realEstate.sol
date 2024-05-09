@@ -56,6 +56,8 @@ contract RealEstate {
             "https://ipfs.io/ipfs/QmZ6HpSkr5VAJW1SsWfZTFq44gJjT5Wshh349hi5vfQme2"
         );
 
+        realEstateEngine.approve(address(this), nftId);
+
         realEstateEngine.transferFrom(msg.sender, address(this), nftId);
 
         isListed[nftId] = true;
@@ -90,6 +92,8 @@ contract RealEstate {
 
         (bool success, ) = payable(seller).call{value: address(this).balance}("");
         require(success);
+
+        realEstateEngine.approve(buyer[nftId], nftId);
 
         realEstateEngine.transferFrom(address(this), buyer[nftId], nftId);
     }
