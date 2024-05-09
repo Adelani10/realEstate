@@ -46,15 +46,16 @@ contract RealEstate {
     mapping(uint256 => mapping(address => bool)) private approval;
     mapping(uint256 => bool) public inspectionPassed;
 
-
-    function list(
+    function mintAndlist(
         uint256 nftId,
         uint256 _purchasePrice,
         uint256 _whatItCosts,
         address _buyer
     ) public onlySeller {
-        realEstateEngine.mint("https://ipfs.io/ipfs/QmZ6HpSkr5VAJW1SsWfZTFq44gJjT5Wshh349hi5vfQme2");
-        
+        realEstateEngine.mint(
+            "https://ipfs.io/ipfs/QmZ6HpSkr5VAJW1SsWfZTFq44gJjT5Wshh349hi5vfQme2"
+        );
+
         realEstateEngine.transferFrom(msg.sender, address(this), nftId);
 
         isListed[nftId] = true;
@@ -64,9 +65,7 @@ contract RealEstate {
         approval[nftId][msg.sender] = true;
         buyer[nftId] = _buyer;
         inspectionPassed[nftId] = true;
-
     }
-
 
     function deposition(uint256 nftId) public payable onlyBuyer(nftId) {
         require(msg.value >= whatItCosts[nftId], "insufficient amount deposited");
@@ -76,7 +75,7 @@ contract RealEstate {
         require(inspectionPassed[nftId] == true, "inspection failed");
     }
 
-    function approvalSale(uint256 nftId) private {
+    function approveSale(uint256 nftId) private {
         approval[nftId][msg.sender] = true;
     }
 
@@ -89,25 +88,39 @@ contract RealEstate {
 
         isListed[nftId] = false;
 
-        (bool success,) = payable(seller).call{value: address(this).balance}("");
+        (bool success, ) = payable(seller).call{value: address(this).balance}("");
         require(success);
 
         realEstateEngine.transferFrom(address(this), buyer[nftId], nftId);
-
     }
 
-
     function cancelSale(uint256 nftId) public {
-        if(inspectionPassed[nftId] == false) {
-            (bool success,) = payable(buyer[nftId]).call{value: address(this).balance}("");
+        if (inspectionPassed[nftId] == false) {
+            (bool success, ) = payable(buyer[nftId]).call{value: address(this).balance}("");
             require(success);
         } else {
-            (bool success,) = payable(seller).call{value: address(this).balance}("");
+            (bool success, ) = payable(seller).call{value: address(this).balance}("");
             require(success);
         }
     }
 
-    receive() external payable{}
+    receive() external payable {}
 
+    // GETTERS
 
+    function getSeller() public view returns (address) {
+        return seller;
+    }
+
+    function getInspector() public view returns (address) {
+        return inspector;
+    }
+
+    function getLender() public view returns (address) {
+        return lender;
+    }
+
+    function getEngineContract() public view returns (RealEstateEngine) {
+        return realEstateEngine;
+    }
 }

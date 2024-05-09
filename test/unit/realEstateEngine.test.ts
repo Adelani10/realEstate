@@ -8,7 +8,7 @@ import { assert, expect } from "chai"
     ? describe.skip
     : describe("RealEstateEngine", () => {
           let realEstateEngine: RealEstateEngine, deployer: Signer
-
+          const TOKEN_URI: string = "https://ipfs.io/ipfs/QmZ6HpSkr5VAJW1SsWfZTFq44gJjT5Wshh349hi5vfQme2"
           beforeEach(async () => {
               const accounts = await ethers.getSigners()
               deployer = accounts[0]
@@ -27,8 +27,15 @@ import { assert, expect } from "chai"
           })
 
           describe("mint", () => {
-            it("mints the nft to the seller", async () => {
-              // const transaction = await realEstateEngine.mint(uri, 1)
+            it("increments the tokenIds, mints the nft to the seller and returns the current tokenId", async () => {
+              const transaction = await realEstateEngine.mint(TOKEN_URI)
+              await transaction.wait(1)
+              const res = await realEstateEngine.currentId()
+              const response = await realEstateEngine.tokenURI(1)
+              const owner = await realEstateEngine.ownerOf(1)
+              assert.equal(owner, (await deployer.getAddress()).toString())
+              assert.equal(res.toString(), "1")
+              assert.equal(response, TOKEN_URI)
               
             })
           })

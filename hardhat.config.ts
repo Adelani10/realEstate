@@ -51,7 +51,7 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
       apiKey: process.env.ETHERSCAN_API_KEY || "",
-      // customChains: [],
+      customChains: [],
   },
   mocha: {
     timeout: 500000, // 500 seconds max for running tests
