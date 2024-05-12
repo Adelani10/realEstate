@@ -1,6 +1,7 @@
 import "@typechain/hardhat"
 import "@nomiclabs/hardhat-waffle"
-import "@nomiclabs/hardhat-etherscan"
+// import "@nomiclabs/hardhat-etherscan"
+import "@nomicfoundation/hardhat-verify";
 import "@nomiclabs/hardhat-ethers"
 import "hardhat-gas-reporter"
 import "dotenv/config"

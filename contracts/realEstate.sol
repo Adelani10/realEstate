@@ -5,18 +5,18 @@ import "./realEstateEngine.sol";
 
 contract RealEstate {
     // state variables
+    address public nftAddress;
     address public seller;
     address private lender;
     address private inspector;
-    RealEstateEngine realEstateEngine;
 
     constructor(
-        address _realEstateEngine,
+        address _nftAddress,
         address payable _seller,
         address _inspector,
         address _lender
     ) {
-        realEstateEngine = RealEstateEngine(_realEstateEngine);
+        nftAddress = _nftAddress;
         seller = _seller;
         inspector = _inspector;
         lender = _lender;
@@ -43,22 +43,17 @@ contract RealEstate {
     mapping(uint256 => uint256) public purchasePrice;
     mapping(uint256 => uint256) public whatItCosts;
     mapping(uint256 => bool) public isListed;
-    mapping(uint256 => mapping(address => bool)) private approval;
+    mapping(uint256 => mapping(address => bool)) public approval;
     mapping(uint256 => bool) public inspectionPassed;
 
-    function mintAndlist(
+    function list(
         uint256 nftId,
         uint256 _purchasePrice,
         uint256 _whatItCosts,
         address _buyer
     ) public onlySeller {
-        realEstateEngine.mint(
-            "https://ipfs.io/ipfs/QmZ6HpSkr5VAJW1SsWfZTFq44gJjT5Wshh349hi5vfQme2"
-        );
 
-        realEstateEngine.approve(address(this), nftId);
-
-        realEstateEngine.transferFrom(msg.sender, address(this), nftId);
+        IERC721(nftAddress).transferFrom(msg.sender, address(this), nftId);
 
         isListed[nftId] = true;
 
@@ -77,25 +72,25 @@ contract RealEstate {
         require(inspectionPassed[nftId] == true, "inspection failed");
     }
 
-    function approveSale(uint256 nftId) private {
+    function approveSale(uint256 nftId) public {
         approval[nftId][msg.sender] = true;
     }
 
     function finalizeSale(uint256 nftId) public {
         require(inspectionPassed[nftId] == true);
         require(purchasePrice[nftId] >= address(this).balance);
-        require(approval[nftId][seller] == true);
-        require(approval[nftId][buyer[nftId]] == true);
-        require(approval[nftId][lender] == true);
+        require(approval[nftId][seller] == true, "seller not approved");
+        require(approval[nftId][buyer[nftId]] == true, "buyer not approved");
+        require(approval[nftId][lender] == true, "lender not approved");
 
         isListed[nftId] = false;
 
         (bool success, ) = payable(seller).call{value: address(this).balance}("");
         require(success);
 
-        realEstateEngine.approve(buyer[nftId], nftId);
+        IERC721(nftAddress).approve(buyer[nftId], nftId);
 
-        realEstateEngine.transferFrom(address(this), buyer[nftId], nftId);
+        IERC721(nftAddress).transferFrom(address(this), buyer[nftId], nftId);
     }
 
     function cancelSale(uint256 nftId) public {
@@ -124,7 +119,7 @@ contract RealEstate {
         return lender;
     }
 
-    function getEngineContract() public view returns (RealEstateEngine) {
-        return realEstateEngine;
+    function getEngineContract() public view returns (address) {
+        return nftAddress;
     }
 }

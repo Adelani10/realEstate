@@ -13,6 +13,7 @@ const deployRealEstate: DeployFunction = async (hre: HardhatRuntimeEnvironment) 
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
     const [seller, buyer, inspector, lender] = await ethers.getSigners()
+    // console.log(buyer)
     const waitBlockConfirmations = developmentChains.includes(network.name)
         ? 1
         : VERIFICATION_BLOCK_CONFIRMATIONS
